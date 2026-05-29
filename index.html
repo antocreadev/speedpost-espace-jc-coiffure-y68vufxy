@@ -1,0 +1,469 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Espace JC Coiffure : coiffeur visagiste à Bastia depuis 2006</title>
+  <meta name="description" content="Espace JC Coiffure, salon de Jean-Michel Pomier, coiffeur visagiste rue Cesar Campinchi a Bastia depuis 2006. Coupe, couleur, mariage. Sans rendez-vous possible."/>
+  <meta name="theme-color" content="#F2F1EE"/>
+  <meta property="og:title" content="Espace JC Coiffure : coiffeur visagiste a Bastia"/>
+  <meta property="og:description" content="On ne coupe pas des cheveux, on dessine un visage. Salon de coiffure visagiste a Bastia depuis 2006."/>
+  <meta property="og:type" content="website"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;0,6..96,600;0,6..96,700;1,6..96,400;1,6..96,500&family=Caveat:wght@400;500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="./tailwind.css"/>
+  <style>
+    :root{
+      --bg:#F2F1EE; --ink:#16181C; --ink-2:#6B6F76; --accent:#B66E5A; --line:#D7D4CD;
+    }
+    html{scroll-behavior:smooth;}
+    html,body{background:var(--bg);color:var(--ink);}
+    body{font-family:'Inter',system-ui,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden;}
+    .font-display{font-family:'Bodoni Moda',serif;}
+    .font-hand{font-family:'Caveat',cursive;}
+
+    /* gypse grain : trame fine type planche d'etude */
+    .paper-grid{
+      background-image:
+        linear-gradient(var(--line) 1px, transparent 1px),
+        linear-gradient(90deg, var(--line) 1px, transparent 1px);
+      background-size: 48px 48px;
+      opacity:.32;
+    }
+
+    /* reveals robustes */
+    .js-ready [data-reveal]{opacity:0;transform:translateY(22px);animation:autoreveal .6s cubic-bezier(.2,.7,.2,1) .15s forwards;}
+    @keyframes autoreveal{to{opacity:1;transform:translateY(0)}}
+
+    /* trace de coupe : path SVG soulignage */
+    .cut-line{stroke:var(--accent);stroke-width:2.5;stroke-linecap:round;fill:none;
+      stroke-dasharray:var(--len,240);stroke-dashoffset:var(--len,240);}
+    .js-ready .cut-line{animation:cutdraw .6s cubic-bezier(.2,.7,.2,1) forwards;animation-play-state:paused;}
+    @keyframes cutdraw{to{stroke-dashoffset:0}}
+
+    /* portrait construction lines */
+    .portrait-path{fill:none;stroke:var(--ink);stroke-width:1.4;stroke-linecap:round;stroke-linejoin:round;}
+    .build-line{fill:none;stroke:var(--line);stroke-width:1;stroke-linecap:round;}
+    .build-accent{fill:none;stroke:var(--accent);stroke-width:1.4;stroke-linecap:round;stroke-dasharray:3 4;}
+    .draws{stroke-dasharray:var(--l,1200);stroke-dashoffset:var(--l,1200);}
+    /* filet securite : si JS plante, on montre tout apres 0.9s */
+    .no-js-fallback .draws{animation:drawfill 1s ease-out .9s forwards;}
+    @keyframes drawfill{to{stroke-dashoffset:0}}
+
+    .tier:hover .tier-morph{opacity:1;transform:scaleX(1);}
+    .tier-morph{opacity:0;transform:scaleX(.4);transform-origin:left;transition:opacity .25s ease,transform .25s ease;}
+    @media (max-width:768px){ .tier-morph{opacity:.7;transform:scaleX(1);} }
+
+    .card-lift{transition:transform .18s ease, box-shadow .18s ease;}
+    .card-lift:hover{transform:translateY(-3px);box-shadow:0 18px 40px -28px rgba(22,24,28,.45);}
+
+    .neutral-img{filter:grayscale(.15) contrast(.97);}
+    .map-frame{filter:grayscale(.3) contrast(.98);}
+
+    a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:4px;}
+    ::selection{background:var(--accent);color:#fff;}
+
+    @media (prefers-reduced-motion:reduce){
+      .js-ready [data-reveal]{animation:none!important;opacity:1!important;transform:none!important;}
+      .draws,.cut-line{stroke-dashoffset:0!important;animation:none!important;}
+      html{scroll-behavior:auto;}
+    }
+  </style>
+</head>
+<body class="antialiased no-js-fallback">
+
+  <!-- ============ NAV ============ -->
+  <header class="fixed top-0 inset-x-0 z-50 bg-bg/90 backdrop-blur-md border-b border-line">
+    <nav class="max-w-6xl mx-auto px-5 sm:px-8 h-16 flex items-center justify-between">
+      <a href="#top" class="font-display text-2xl sm:text-3xl font-bold tracking-tight leading-none">
+        JC<span class="text-accent">.</span>
+      </a>
+      <div class="hidden md:flex items-center gap-8 text-sm">
+        <a href="#visagiste" class="hover:text-accent transition-colors">Le visagiste</a>
+        <a href="#prestations" class="hover:text-accent transition-colors">Prestations</a>
+        <a href="#trouver" class="hover:text-accent transition-colors">Trouver</a>
+        <a href="tel:+33495372940" class="inline-flex items-center gap-2 bg-accent text-white px-4 py-2 rounded-full text-sm font-medium hover:bg-ink transition-colors">
+          <span aria-hidden="true">&#9742;</span> 04 95 37 29 40
+        </a>
+      </div>
+      <a href="tel:+33495372940" class="md:hidden inline-flex items-center gap-2 bg-accent text-white px-3.5 py-2 rounded-full text-sm font-medium">
+        <span aria-hidden="true">&#9742;</span> Appeler
+      </a>
+    </nav>
+  </header>
+
+  <main id="top">
+
+    <!-- ============ HERO PORTRAIT ============ -->
+    <section class="relative min-h-[92vh] flex items-center pt-24 pb-16 overflow-hidden">
+      <div class="absolute inset-0 paper-grid pointer-events-none" aria-hidden="true"></div>
+      <div class="relative max-w-6xl mx-auto px-5 sm:px-8 w-full grid md:grid-cols-[1.1fr_.9fr] gap-10 items-center">
+
+        <!-- texte -->
+        <div class="relative z-10">
+          <p data-reveal class="text-[0.72rem] sm:text-xs font-medium uppercase tracking-[0.22em] text-ink-2 mb-6">
+            Salon de coiffure &middot; Visagiste &middot; Bastia depuis 2006
+          </p>
+          <h1 data-reveal class="font-display leading-[0.92] tracking-[-0.03em]">
+            <span class="block text-[clamp(3.2rem,13vw,8.5rem)] font-bold">Espace JC</span>
+            <span class="block text-[clamp(1.6rem,6vw,3.4rem)] font-normal italic text-ink-2 mt-1">coiffure</span>
+          </h1>
+          <p data-reveal class="font-display italic text-[clamp(1.3rem,4.5vw,2rem)] leading-snug mt-7 max-w-md">
+            On ne coupe pas des cheveux,<br/>on dessine un visage.
+          </p>
+          <p data-reveal class="text-[1.02rem] leading-relaxed text-ink-2 mt-6 max-w-md">
+            Depuis 2006, rue Cesar Campinchi, Jean-Michel Pomier lit chaque visage avant de poser le ciseau. Coupe, couleur, mariage : un geste de visagiste, un accueil de quartier, a deux pas de la Place Saint-Nicolas.
+          </p>
+          <div data-reveal class="flex flex-wrap gap-3 mt-9">
+            <a href="tel:+33495372940" class="inline-flex items-center gap-2 bg-accent text-white px-7 py-3.5 rounded-full font-medium hover:bg-ink transition-colors">
+              <span aria-hidden="true">&#9742;</span> Appeler le salon
+            </a>
+            <a href="#trouver" class="inline-flex items-center gap-2 border border-ink/30 px-7 py-3.5 rounded-full font-medium hover:border-accent hover:text-accent transition-colors">
+              Trouver le salon
+            </a>
+          </div>
+        </div>
+
+        <!-- portrait vectoriel : money shot -->
+        <div class="relative z-0 -mt-6 md:mt-0 opacity-60 md:opacity-100 mx-auto w-[78%] sm:w-[60%] md:w-full max-w-sm">
+          <svg id="portrait" viewBox="0 0 360 460" class="w-full h-auto" role="img" aria-label="Portrait de profil parcouru des lignes de construction du visagiste">
+            <!-- axes de construction (tiers / symetrie) -->
+            <line class="build-line draws" style="--l:460" x1="118" y1="60" x2="118" y2="430"/>
+            <line class="build-line draws" style="--l:300" x1="60" y1="150" x2="300" y2="150"/>
+            <line class="build-line draws" style="--l:300" x1="60" y1="250" x2="300" y2="250"/>
+            <line class="build-line draws" style="--l:300" x1="60" y1="350" x2="300" y2="350"/>
+            <!-- cercle de l'oeil -->
+            <circle class="build-accent draws" style="--l:90" cx="150" cy="200" r="14"/>
+            <!-- ligne de machoire -->
+            <path class="build-accent draws" style="--l:240" d="M120 350 Q 175 410 235 365"/>
+
+            <!-- profil (trait principal) -->
+            <path class="portrait-path draws" style="--l:980" d="M205 70
+              C150 70 120 110 120 165
+              C120 185 128 196 132 208
+              C136 220 124 226 132 238
+              C140 250 128 256 134 268
+              C140 278 152 280 158 286
+              C160 300 150 312 165 322
+              C182 332 210 330 224 322
+              C236 316 240 300 240 286
+              C262 278 282 250 286 214
+              C292 168 278 110 232 84
+              C223 78 214 72 205 70 Z"/>
+            <!-- meche / cheveux geste -->
+            <path class="portrait-path draws" style="--l:420" d="M126 150 C 150 96 215 70 252 96 C 230 84 188 92 168 120"/>
+            <!-- point d'equilibre -->
+            <circle cx="118" cy="250" r="4" fill="var(--accent)"/>
+          </svg>
+          <!-- annotations crayon -->
+          <span class="annot font-hand text-ink-2 text-lg absolute" style="top:30%;left:-6%;">axe de symetrie</span>
+          <span class="annot font-hand text-ink-2 text-lg absolute" style="top:46%;right:-4%;">point d'equilibre</span>
+          <span class="annot font-hand text-ink-2 text-lg absolute" style="top:80%;right:2%;">ligne de machoire</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ COMPTEUR CONSTRUCTION ============ -->
+    <section class="border-y border-line">
+      <div class="max-w-6xl mx-auto px-5 sm:px-8 py-12 grid grid-cols-1 sm:grid-cols-3 divide-y sm:divide-y-0 sm:divide-x divide-line">
+        <div data-reveal class="text-center py-6 sm:py-2 px-4">
+          <div class="font-display text-[clamp(3rem,8vw,5rem)] font-bold leading-none"><span class="count" data-to="20">0</span></div>
+          <p class="text-xs uppercase tracking-[0.16em] text-ink-2 mt-3">ans rue Cesar Campinchi</p>
+        </div>
+        <div data-reveal class="text-center py-6 sm:py-2 px-4">
+          <div class="font-display text-[clamp(3rem,8vw,5rem)] font-bold leading-none text-accent"><span class="count" data-to="4.8" data-dec="1">0</span><span class="text-ink-2 text-2xl align-middle">/5</span></div>
+          <p class="text-xs uppercase tracking-[0.16em] text-ink-2 mt-3">sur Google</p>
+        </div>
+        <div data-reveal class="text-center py-6 sm:py-2 px-4">
+          <div class="font-display text-[clamp(3rem,8vw,5rem)] font-bold leading-none"><span class="count" data-to="17">0</span></div>
+          <p class="text-xs uppercase tracking-[0.16em] text-ink-2 mt-3">voix, 16 cinq etoiles</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ LE VISAGISTE ============ -->
+    <section id="visagiste" class="max-w-6xl mx-auto px-5 sm:px-8 py-20 sm:py-28">
+      <div class="grid md:grid-cols-[3fr_2fr] gap-12 md:gap-16 items-start">
+        <div>
+          <div data-reveal class="inline-block relative mb-6">
+            <h2 class="font-display text-[clamp(1.9rem,5vw,3.2rem)] font-semibold leading-none">Le visagiste</h2>
+            <svg class="absolute -bottom-3 left-0 w-44 h-3" viewBox="0 0 200 12" preserveAspectRatio="none" aria-hidden="true">
+              <path class="cut-line" style="--len:210" d="M2 8 Q 60 2 110 7 T 198 5"/>
+            </svg>
+          </div>
+          <p data-reveal class="text-[1.05rem] leading-[1.75] text-ink/90">
+            <span class="float-left font-display text-[4.2rem] leading-[0.7] font-bold mr-3 mt-2 text-accent">D</span>epuis vingt ans, Jean-Michel Pomier tient son salon au coeur de Bastia. Visagiste de formation, il fait ce qu'un coiffeur ordinaire ne fait pas : il regarde d'abord. La forme du visage, la ligne de la machoire, la maniere dont la lumiere tombe sur les pommettes.
+          </p>
+          <p data-reveal class="text-[1.05rem] leading-[1.75] text-ink-2 mt-5">
+            De cette lecture nait la coupe. Pas une mode plaquee, mais une ligne pensee pour vous, qui tient quand vous rentrez chez vous et que vous repassez la main dedans. C'est la difference d'un geste de visagiste : la technique au service de votre visage, jamais l'inverse.
+          </p>
+          <p data-reveal class="text-[1.05rem] leading-[1.75] text-ink-2 mt-5">
+            Vingt ans plus tard, la clientele revient, fidele, et amene ses enfants. Le bouche-a-oreille de tout un quartier tient dans une note : 4,8 sur 5.
+          </p>
+        </div>
+
+        <figure data-reveal class="relative">
+          <div class="border border-line p-2 bg-bg">
+            <img src="./assets/images/interieur-fauteuil-miroir.jpg" alt="Le fauteuil du salon, miroir et lumiere" loading="lazy" class="w-full aspect-[4/5] object-cover neutral-img"/>
+          </div>
+          <figcaption class="font-hand text-ink-2 text-xl mt-3 text-right pr-2">le fauteuil, depuis 2006</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- ============ LES TIERS (prestations) ============ -->
+    <section id="prestations" class="bg-bg border-t border-line">
+      <div class="max-w-6xl mx-auto px-5 sm:px-8 py-20 sm:py-28">
+        <div data-reveal class="max-w-2xl mb-14">
+          <p class="text-xs uppercase tracking-[0.2em] text-ink-2 mb-4">La lecture du visage</p>
+          <h2 class="font-display text-[clamp(1.9rem,5vw,3.2rem)] font-semibold leading-tight">
+            Trois tiers, trois gestes.
+          </h2>
+          <p class="text-ink-2 mt-4 leading-relaxed">Le visage se lit en trois tiers. Le salon s'organise de la meme maniere : la coupe, la couleur, le jour J. Pas de tarifs affiches : un conseil, un devis, sur place. Sans rendez-vous possible.</p>
+        </div>
+
+        <div class="space-y-px border border-line bg-line">
+
+          <!-- I -->
+          <article class="tier relative bg-bg p-7 sm:p-10 grid sm:grid-cols-[auto_1fr_auto] gap-6 sm:gap-10 items-center">
+            <div data-reveal class="font-display text-5xl sm:text-6xl font-normal italic text-ink-2 leading-none w-16">I</div>
+            <div data-reveal class="relative">
+              <div class="font-hand text-accent text-base mb-1 tier-morph">tiers superieur</div>
+              <h3 class="font-display text-2xl sm:text-[1.9rem] font-semibold inline-block relative">
+                La coupe &amp; le geste
+                <svg class="absolute -bottom-2 left-0 w-full h-2.5" viewBox="0 0 240 10" preserveAspectRatio="none" aria-hidden="true"><path class="cut-line" style="--len:250" d="M2 6 Q 80 1 150 5 T 238 4"/></svg>
+              </h3>
+              <p class="text-ink-2 mt-4 leading-relaxed max-w-lg">Coupe femme, homme et enfant. Changement de style ou simple rafraichissement, brushing, et le conseil morphologie qui fait toute la difference. La ligne pensee pour votre visage.</p>
+            </div>
+            <div data-reveal class="hidden sm:block w-36 shrink-0 border border-line p-1.5 bg-bg">
+              <img src="./assets/images/hero-salon-chaises.jpg" alt="Chaises et miroirs du salon" loading="lazy" class="w-full aspect-square object-cover neutral-img"/>
+            </div>
+          </article>
+
+          <!-- II -->
+          <article class="tier relative bg-bg p-7 sm:p-10 grid sm:grid-cols-[auto_1fr_auto] gap-6 sm:gap-10 items-center">
+            <div data-reveal class="font-display text-5xl sm:text-6xl font-normal italic text-ink-2 leading-none w-16">II</div>
+            <div data-reveal class="relative">
+              <div class="font-hand text-accent text-base mb-1 tier-morph">tiers median</div>
+              <h3 class="font-display text-2xl sm:text-[1.9rem] font-semibold inline-block relative">
+                La couleur &amp; la matiere
+                <svg class="absolute -bottom-2 left-0 w-full h-2.5" viewBox="0 0 240 10" preserveAspectRatio="none" aria-hidden="true"><path class="cut-line" style="--len:250" d="M2 6 Q 80 1 150 5 T 238 4"/></svg>
+              </h3>
+              <p class="text-ink-2 mt-4 leading-relaxed max-w-lg">Coloration, balayage et meches, permanente, traitements de lissage. La matiere du cheveu travaillee avec justesse, pour une couleur qui vous ressemble et tient dans le temps.</p>
+            </div>
+            <div data-reveal class="hidden sm:block w-36 shrink-0 border border-line p-1.5 bg-bg">
+              <img src="./assets/images/salon-produits-modernes.jpg" alt="Produits et matieres de coloration" loading="lazy" class="w-full aspect-square object-cover neutral-img"/>
+            </div>
+          </article>
+
+          <!-- III -->
+          <article class="tier relative bg-bg p-7 sm:p-10 grid sm:grid-cols-[auto_1fr_auto] gap-6 sm:gap-10 items-center">
+            <div data-reveal class="font-display text-5xl sm:text-6xl font-normal italic text-accent leading-none w-16">III</div>
+            <div data-reveal class="relative">
+              <div class="font-hand text-accent text-base mb-1 tier-morph">tiers inferieur</div>
+              <h3 class="font-display text-2xl sm:text-[1.9rem] font-semibold inline-block relative">
+                Le jour J
+                <svg class="absolute -bottom-2 left-0 w-full h-2.5" viewBox="0 0 240 10" preserveAspectRatio="none" aria-hidden="true"><path class="cut-line" style="--len:250" d="M2 6 Q 80 1 150 5 T 238 4"/></svg>
+              </h3>
+              <p class="text-ink-2 mt-4 leading-relaxed max-w-lg">Coiffures de mariage, essais, grandes occasions. Le geste premium du salon : on prepare votre coiffure comme on dessine un portrait, pour que tout tienne du matin au dernier slow.</p>
+            </div>
+            <div data-reveal class="hidden sm:block w-36 shrink-0 border border-accent/40 p-1.5 bg-bg">
+              <img src="./assets/images/experience-coiffure.jpg" alt="Coiffage soigne, occasion speciale" loading="lazy" class="w-full aspect-square object-cover neutral-img"/>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ SANS RENDEZ-VOUS (inversion sombre) ============ -->
+    <section class="bg-ink text-bg">
+      <div class="max-w-5xl mx-auto px-5 sm:px-8 py-20 sm:py-28 text-center">
+        <p data-reveal class="text-xs uppercase tracking-[0.22em] text-bg/60 mb-7">Le luxe d'un quartier</p>
+        <h2 data-reveal class="font-display text-[clamp(2rem,6vw,4rem)] font-normal italic leading-[1.1]">
+          Passez quand vous voulez.<br/>Sans rendez-vous, c'est possible.
+        </h2>
+        <div data-reveal class="mt-12 inline-grid grid-cols-2 sm:grid-cols-3 gap-x-10 gap-y-4 text-left text-sm" style="font-variant-numeric:tabular-nums;">
+          <div class="flex justify-between gap-6 border-b border-bg/15 pb-2"><span class="text-bg/60">Mardi</span><span>09:00 - 18:30</span></div>
+          <div class="flex justify-between gap-6 border-b border-bg/15 pb-2"><span class="text-bg/60">Mercredi</span><span>08:30 - 12:00</span></div>
+          <div class="flex justify-between gap-6 border-b border-bg/15 pb-2"><span class="text-bg/60">Jeudi</span><span>09:00 - 18:30</span></div>
+          <div class="flex justify-between gap-6 border-b border-bg/15 pb-2"><span class="text-bg/60">Vendredi</span><span>09:00 - 18:30</span></div>
+          <div class="flex justify-between gap-6 border-b border-bg/15 pb-2"><span class="text-bg/60">Samedi</span><span>09:00 - 18:30</span></div>
+          <div class="flex justify-between gap-6 border-b border-bg/15 pb-2"><span class="text-bg/60">Lun &amp; Dim</span><span class="text-bg/40">Ferme</span></div>
+        </div>
+        <div data-reveal class="mt-11">
+          <a href="tel:+33495372940" class="inline-flex items-center gap-2 bg-accent text-white px-8 py-3.5 rounded-full font-medium hover:bg-bg hover:text-ink transition-colors">
+            <span aria-hidden="true">&#9742;</span> 04 95 37 29 40
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ PAROLES (avis) ============ -->
+    <section class="max-w-6xl mx-auto px-5 sm:px-8 py-20 sm:py-28">
+      <div data-reveal class="flex items-end justify-between flex-wrap gap-4 mb-12">
+        <h2 class="font-display text-[clamp(1.9rem,5vw,3.2rem)] font-semibold leading-none">Ce qu'on en dit</h2>
+        <p class="text-ink-2 text-sm">4,8 / 5 &middot; 16 avis cinq etoiles sur Google</p>
+      </div>
+      <div class="grid md:grid-cols-3 gap-5">
+        <figure data-reveal class="card-lift bg-bg border border-line p-7 flex flex-col">
+          <div class="text-accent text-lg mb-4" aria-label="5 etoiles sur 5">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <blockquote class="font-display text-lg leading-snug italic flex-1">&laquo; Un vrai professionnel qui prend le temps de conseiller. Je ressors toujours avec une coupe qui me va vraiment. &raquo;</blockquote>
+          <figcaption class="text-xs uppercase tracking-[0.14em] text-ink-2 mt-6">Avis Google</figcaption>
+        </figure>
+        <figure data-reveal class="card-lift bg-bg border border-line p-7 flex flex-col">
+          <div class="text-accent text-lg mb-4" aria-label="5 etoiles sur 5">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <blockquote class="font-display text-lg leading-snug italic flex-1">&laquo; Salon accueillant et chaleureux, en plein centre. On peut passer sans rendez-vous, c'est tellement pratique. &raquo;</blockquote>
+          <figcaption class="text-xs uppercase tracking-[0.14em] text-ink-2 mt-6">Avis Google</figcaption>
+        </figure>
+        <figure data-reveal class="card-lift bg-bg border border-line p-7 flex flex-col">
+          <div class="text-accent text-lg mb-4" aria-label="5 etoiles sur 5">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <blockquote class="font-display text-lg leading-snug italic flex-1">&laquo; Le coiffeur de la famille depuis des annees. Un savoir-faire et une fidelite qui se ressentent. &raquo;</blockquote>
+          <figcaption class="text-xs uppercase tracking-[0.14em] text-ink-2 mt-6">Avis Google</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- ============ TROUVER ============ -->
+    <section id="trouver" class="border-t border-line bg-bg">
+      <div class="max-w-6xl mx-auto px-5 sm:px-8 py-20 sm:py-28 grid md:grid-cols-2 gap-12 items-start">
+        <div>
+          <h2 data-reveal class="font-display text-[clamp(1.9rem,5vw,3.2rem)] font-semibold leading-none">Au coeur de Bastia</h2>
+          <div data-reveal class="flex items-center gap-4 mt-8">
+            <span class="block w-16 h-16 rounded-full overflow-hidden border border-line shrink-0">
+              <img src="./assets/images/facade-rue-campinchi.jpg" alt="Devanture rue Cesar Campinchi" loading="lazy" class="w-full h-full object-cover neutral-img"/>
+            </span>
+            <div>
+              <p class="font-medium">28 Rue Cesar Campinchi</p>
+              <p class="text-ink-2 text-sm">20200 Bastia &middot; a 2 min de la Place Saint-Nicolas</p>
+            </div>
+          </div>
+
+          <a data-reveal href="tel:+33495372940" class="font-display block text-[clamp(2rem,6vw,3rem)] font-semibold mt-9 hover:text-accent transition-colors leading-none">04 95 37 29 40</a>
+          <p data-reveal class="text-ink-2 text-sm mt-2">Sans rendez-vous possible. Un appel suffit.</p>
+
+          <div data-reveal class="mt-9 text-sm space-y-2 max-w-xs" style="font-variant-numeric:tabular-nums;">
+            <div class="flex justify-between border-b border-line pb-2"><span class="text-ink-2">Mardi</span><span>09:00 - 18:30</span></div>
+            <div class="flex justify-between border-b border-line pb-2"><span class="text-ink-2">Mercredi</span><span>08:30 - 12:00</span></div>
+            <div class="flex justify-between border-b border-line pb-2"><span class="text-ink-2">Jeudi</span><span>09:00 - 18:30</span></div>
+            <div class="flex justify-between border-b border-line pb-2"><span class="text-ink-2">Vendredi</span><span>09:00 - 18:30</span></div>
+            <div class="flex justify-between border-b border-line pb-2"><span class="text-ink-2">Samedi</span><span>09:00 - 18:30</span></div>
+            <div class="flex justify-between"><span class="text-ink-2">Lundi &amp; Dimanche</span><span class="text-ink-2/70">Ferme</span></div>
+          </div>
+        </div>
+
+        <div data-reveal class="border border-line p-2 bg-bg">
+          <iframe title="Plan d'acces au salon Espace JC Coiffure, 28 Rue Cesar Campinchi, Bastia"
+            src="https://maps.google.com/maps?q=42.7017683,9.4499462&z=15&output=embed"
+            class="map-frame w-full aspect-[4/3] md:aspect-[3/4]" style="border:0" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ============ FOOTER SIGNATURE ============ -->
+  <footer class="border-t border-line">
+    <div class="max-w-6xl mx-auto px-5 sm:px-8 py-16 grid md:grid-cols-[1fr_auto] gap-12 items-center">
+      <div>
+        <div class="font-display text-[clamp(1.8rem,5vw,2.8rem)] font-bold leading-none">Espace JC Coiffure</div>
+        <p class="text-ink-2 mt-3">Coiffeur visagiste a Bastia depuis 2006.</p>
+        <p class="text-ink-2 text-sm mt-4">28 Rue Cesar Campinchi, 20200 Bastia &middot; <a href="tel:+33495372940" class="hover:text-accent transition-colors">04 95 37 29 40</a></p>
+      </div>
+      <svg viewBox="0 0 140 180" class="w-28 h-auto justify-self-start md:justify-self-end opacity-80" aria-hidden="true">
+        <line class="build-line" x1="46" y1="24" x2="46" y2="168"/>
+        <line class="build-line" x1="22" y1="60" x2="118" y2="60"/>
+        <line class="build-line" x1="22" y1="98" x2="118" y2="98"/>
+        <line class="build-line" x1="22" y1="136" x2="118" y2="136"/>
+        <circle class="build-accent" style="stroke-dasharray:0" cx="60" cy="80" r="6"/>
+        <path class="build-accent" style="stroke-dasharray:0" d="M48 136 Q 70 164 92 142"/>
+        <path class="portrait-path" d="M81 28 C 58 28 46 44 46 66 C 46 76 50 80 52 86 C 54 92 48 96 52 102 C 56 108 50 112 53 118 C 57 124 64 126 64 132 C 64 140 60 146 67 150 C 75 154 86 152 92 148 C 98 144 100 136 100 130 C 110 126 118 110 120 90 C 122 64 112 38 92 32 C 88 30 84 28 81 28 Z"/>
+      </svg>
+    </div>
+    <div class="border-t border-line">
+      <div class="max-w-6xl mx-auto px-5 sm:px-8 py-5 flex flex-wrap items-center justify-between gap-3 text-xs text-ink-2">
+        <span>&copy; 2026 Espace JC Coiffure, Bastia.</span>
+        <span>Site realise par <a href="https://webagentic.speedpost.fr" class="hover:text-accent transition-colors">SpeedPost.fr</a></span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- dock mobile appel -->
+  <a href="tel:+33495372940" class="md:hidden fixed bottom-4 inset-x-4 z-50 flex items-center justify-center gap-2 bg-accent text-white py-3.5 rounded-full font-medium shadow-lg shadow-ink/20">
+    <span aria-hidden="true">&#9742;</span> Appeler le salon
+  </a>
+
+  <script type="module">
+    document.documentElement.classList.add('js-ready');
+    document.body.classList.remove('no-js-fallback');
+
+    let animate, inView, scroll, Lenis;
+    try {
+      ({ animate, inView, scroll } = await import('https://cdn.jsdelivr.net/npm/motion@10.18.0/+esm'));
+      Lenis = (await import('https://cdn.jsdelivr.net/npm/lenis@1.1.13/+esm')).default;
+    } catch (e) {
+      // si les CDN echouent, le filet CSS autoreveal + drawfill prend le relais
+      document.querySelectorAll('.draws,.cut-line').forEach(p => p.style.strokeDashoffset = '0');
+      throw e;
+    }
+
+    const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    if (!reduce) {
+      const lenis = new Lenis({ lerp: 0.1 });
+      function raf(t){ lenis.raf(t); requestAnimationFrame(raf); }
+      requestAnimationFrame(raf);
+    }
+
+    // reveals scroll
+    inView('[data-reveal]', (el) => {
+      animate(el, { opacity: [0, 1], transform: ['translateY(22px)', 'translateY(0)'] },
+        { duration: 0.5, easing: [0.2, 0.7, 0.2, 1] });
+    }, { margin: '0px 0px -10% 0px' });
+
+    // portrait hero : trace en sequence au chargement
+    const portrait = document.querySelector('#portrait');
+    if (portrait) {
+      const paths = [...portrait.querySelectorAll('.draws')];
+      paths.forEach((p, i) => {
+        const len = p.getTotalLength ? p.getTotalLength() : parseFloat(p.style.getPropertyValue('--l')) || 600;
+        p.style.strokeDasharray = len;
+        p.style.strokeDashoffset = len;
+        animate(p, { strokeDashoffset: [len, 0] },
+          { duration: 0.7, delay: 0.2 + i * 0.09, easing: [0.2, 0.7, 0.2, 1] });
+      });
+      // annotations fade-in apres les traits
+      portrait.parentElement.querySelectorAll('.annot').forEach((a, i) => {
+        a.style.opacity = 0;
+        animate(a, { opacity: [0, 1], transform: ['translateY(6px)', 'translateY(0)'] },
+          { duration: 0.4, delay: 0.9 + i * 0.15 });
+      });
+    }
+
+    // traces de coupe (soulignages) a l'apparition
+    inView('.cut-line', (el) => {
+      const len = el.getTotalLength ? el.getTotalLength() : 250;
+      el.style.strokeDasharray = len;
+      el.style.strokeDashoffset = len;
+      animate(el, { strokeDashoffset: [len, 0] }, { duration: 0.55, easing: [0.2, 0.7, 0.2, 1] });
+    });
+
+    // compteurs animes
+    inView('.count', (el) => {
+      const to = parseFloat(el.dataset.to);
+      const dec = parseInt(el.dataset.dec || '0', 10);
+      const start = performance.now(), dur = 900;
+      function step(now){
+        const t = Math.min(1, (now - start) / dur);
+        const e = 1 - Math.pow(1 - t, 3);
+        const v = to * e;
+        el.textContent = dec ? v.toFixed(dec).replace('.', ',') : Math.round(v);
+        if (t < 1) requestAnimationFrame(step);
+        else el.textContent = dec ? to.toFixed(dec).replace('.', ',') : to;
+      }
+      requestAnimationFrame(step);
+    }, { amount: 0.6 });
+  </script>
+</body>
+</html>
