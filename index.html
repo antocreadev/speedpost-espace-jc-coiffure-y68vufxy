@@ -125,42 +125,13 @@
           </div>
         </div>
 
-        <!-- portrait vectoriel : money shot -->
-        <div class="relative z-0 -mt-6 md:mt-0 opacity-60 md:opacity-100 mx-auto w-[78%] sm:w-[60%] md:w-full max-w-sm">
-          <svg id="portrait" viewBox="0 0 360 460" class="w-full h-auto" role="img" aria-label="Portrait de profil parcouru des lignes de construction du visagiste">
-            <!-- axes de construction (tiers / symetrie) -->
-            <line class="build-line draws" style="--l:460" x1="118" y1="60" x2="118" y2="430"/>
-            <line class="build-line draws" style="--l:300" x1="60" y1="150" x2="300" y2="150"/>
-            <line class="build-line draws" style="--l:300" x1="60" y1="250" x2="300" y2="250"/>
-            <line class="build-line draws" style="--l:300" x1="60" y1="350" x2="300" y2="350"/>
-            <!-- cercle de l'oeil -->
-            <circle class="build-accent draws" style="--l:90" cx="150" cy="200" r="14"/>
-            <!-- ligne de machoire -->
-            <path class="build-accent draws" style="--l:240" d="M120 350 Q 175 410 235 365"/>
-
-            <!-- profil (trait principal) -->
-            <path class="portrait-path draws" style="--l:980" d="M205 70
-              C150 70 120 110 120 165
-              C120 185 128 196 132 208
-              C136 220 124 226 132 238
-              C140 250 128 256 134 268
-              C140 278 152 280 158 286
-              C160 300 150 312 165 322
-              C182 332 210 330 224 322
-              C236 316 240 300 240 286
-              C262 278 282 250 286 214
-              C292 168 278 110 232 84
-              C223 78 214 72 205 70 Z"/>
-            <!-- meche / cheveux geste -->
-            <path class="portrait-path draws" style="--l:420" d="M126 150 C 150 96 215 70 252 96 C 230 84 188 92 168 120"/>
-            <!-- point d'equilibre -->
-            <circle cx="118" cy="250" r="4" fill="var(--accent)"/>
-          </svg>
-          <!-- annotations crayon -->
-          <span class="annot font-hand text-ink-2 text-lg absolute" style="top:30%;left:-6%;">axe de symetrie</span>
-          <span class="annot font-hand text-ink-2 text-lg absolute" style="top:46%;right:-4%;">point d'equilibre</span>
-          <span class="annot font-hand text-ink-2 text-lg absolute" style="top:80%;right:2%;">ligne de machoire</span>
-        </div>
+        <!-- photo : money shot -->
+        <figure data-reveal class="relative z-0 -mt-2 md:mt-0 mx-auto w-[84%] sm:w-[68%] md:w-full max-w-md">
+          <div class="border border-line p-2 bg-bg" style="box-shadow:0 30px 60px -40px rgba(22,24,28,.5)">
+            <img src="./assets/images/experience-coiffure.jpg" alt="Coiffage en salon, le geste du visagiste" fetchpriority="high" class="w-full aspect-[4/5] object-cover neutral-img"/>
+          </div>
+          <figcaption class="font-hand text-ink-2 text-xl mt-3 text-right pr-2">le geste, rue Cesar Campinchi</figcaption>
+        </figure>
       </div>
     </section>
 
@@ -269,7 +240,7 @@
               <p class="text-ink-2 mt-4 leading-relaxed max-w-lg">Coiffures de mariage, essais, grandes occasions. Le geste premium du salon : on prepare votre coiffure comme on dessine un portrait, pour que tout tienne du matin au dernier slow.</p>
             </div>
             <div data-reveal class="hidden sm:block w-36 shrink-0 border border-accent/40 p-1.5 bg-bg">
-              <img src="./assets/images/experience-coiffure.jpg" alt="Coiffage soigne, occasion speciale" loading="lazy" class="w-full aspect-square object-cover neutral-img"/>
+              <img src="./assets/images/coiffeuse-salon-blanc.jpg" alt="Coiffage soigne, occasion speciale" loading="lazy" class="w-full aspect-square object-cover neutral-img"/>
             </div>
           </article>
 
@@ -371,15 +342,12 @@
         <p class="text-ink-2 mt-3">Coiffeur visagiste a Bastia depuis 2006.</p>
         <p class="text-ink-2 text-sm mt-4">28 Rue Cesar Campinchi, 20200 Bastia &middot; <a href="tel:+33495372940" class="hover:text-accent transition-colors">04 95 37 29 40</a></p>
       </div>
-      <svg viewBox="0 0 140 180" class="w-28 h-auto justify-self-start md:justify-self-end opacity-80" aria-hidden="true">
-        <line class="build-line" x1="46" y1="24" x2="46" y2="168"/>
-        <line class="build-line" x1="22" y1="60" x2="118" y2="60"/>
-        <line class="build-line" x1="22" y1="98" x2="118" y2="98"/>
-        <line class="build-line" x1="22" y1="136" x2="118" y2="136"/>
-        <circle class="build-accent" style="stroke-dasharray:0" cx="60" cy="80" r="6"/>
-        <path class="build-accent" style="stroke-dasharray:0" d="M48 136 Q 70 164 92 142"/>
-        <path class="portrait-path" d="M81 28 C 58 28 46 44 46 66 C 46 76 50 80 52 86 C 54 92 48 96 52 102 C 56 108 50 112 53 118 C 57 124 64 126 64 132 C 64 140 60 146 67 150 C 75 154 86 152 92 148 C 98 144 100 136 100 130 C 110 126 118 110 120 90 C 122 64 112 38 92 32 C 88 30 84 28 81 28 Z"/>
-      </svg>
+      <figure class="justify-self-start md:justify-self-end">
+        <div class="border border-line p-1.5 bg-bg w-44">
+          <img src="./assets/images/facade-rue-campinchi.jpg" alt="Le salon, 28 rue Cesar Campinchi a Bastia" loading="lazy" class="w-full aspect-[4/3] object-cover neutral-img"/>
+        </div>
+        <figcaption class="font-hand text-ink-2 text-base mt-2 text-right pr-1">28 rue Cesar Campinchi</figcaption>
+      </figure>
     </div>
     <div class="border-t border-line">
       <div class="max-w-6xl mx-auto px-5 sm:px-8 py-5 flex flex-wrap items-center justify-between gap-3 text-xs text-ink-2">
@@ -416,25 +384,6 @@
       animate(el, { opacity: [0, 1], transform: ['translateY(22px)', 'translateY(0)'] },
         { duration: 0.5, easing: [0.2, 0.7, 0.2, 1] });
     }, { margin: '0px 0px -10% 0px' });
-
-    // portrait hero : trace en sequence au chargement
-    const portrait = document.querySelector('#portrait');
-    if (portrait) {
-      const paths = [...portrait.querySelectorAll('.draws')];
-      paths.forEach((p, i) => {
-        const len = p.getTotalLength ? p.getTotalLength() : parseFloat(p.style.getPropertyValue('--l')) || 600;
-        p.style.strokeDasharray = len;
-        p.style.strokeDashoffset = len;
-        animate(p, { strokeDashoffset: [len, 0] },
-          { duration: 0.7, delay: 0.2 + i * 0.09, easing: [0.2, 0.7, 0.2, 1] });
-      });
-      // annotations fade-in apres les traits
-      portrait.parentElement.querySelectorAll('.annot').forEach((a, i) => {
-        a.style.opacity = 0;
-        animate(a, { opacity: [0, 1], transform: ['translateY(6px)', 'translateY(0)'] },
-          { duration: 0.4, delay: 0.9 + i * 0.15 });
-      });
-    }
 
     // traces de coupe (soulignages) a l'apparition
     inView('.cut-line', (el) => {
