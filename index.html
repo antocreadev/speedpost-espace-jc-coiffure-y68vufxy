@@ -398,10 +398,9 @@
     document.documentElement.classList.add('js-ready');
     document.body.classList.remove('no-js-fallback');
 
-    let animate, inView, scroll, Lenis;
+    let animate, inView;
     try {
-      ({ animate, inView, scroll } = await import('https://cdn.jsdelivr.net/npm/motion@10.18.0/+esm'));
-      Lenis = (await import('https://cdn.jsdelivr.net/npm/lenis@1.1.13/+esm')).default;
+      ({ animate, inView } = await import('https://cdn.jsdelivr.net/npm/motion@10.18.0/+esm'));
     } catch (e) {
       // si les CDN echouent, le filet CSS autoreveal + drawfill prend le relais
       document.querySelectorAll('.draws,.cut-line').forEach(p => p.style.strokeDashoffset = '0');
@@ -410,13 +409,9 @@
 
     const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-    if (!reduce) {
-      const lenis = new Lenis({ lerp: 0.1 });
-      function raf(t){ lenis.raf(t); requestAnimationFrame(raf); }
-      requestAnimationFrame(raf);
-    }
+    // scroll natif : aucun smooth-scroll JS (Lenis) qui detourne la molette
 
-    // reveals scroll
+    // reveals (one-shot a l'apparition, jamais scrubbe sur la position de scroll)
     inView('[data-reveal]', (el) => {
       animate(el, { opacity: [0, 1], transform: ['translateY(22px)', 'translateY(0)'] },
         { duration: 0.5, easing: [0.2, 0.7, 0.2, 1] });
