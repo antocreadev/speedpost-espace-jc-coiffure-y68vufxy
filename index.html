@@ -139,15 +139,15 @@
     <section class="border-y border-line">
       <div class="max-w-6xl mx-auto px-5 sm:px-8 py-12 grid grid-cols-1 sm:grid-cols-3 divide-y sm:divide-y-0 sm:divide-x divide-line">
         <div data-reveal class="text-center py-6 sm:py-2 px-4">
-          <div class="font-display text-[clamp(3rem,8vw,5rem)] font-bold leading-none"><span class="count" data-to="20">0</span></div>
+          <div class="font-display text-[clamp(3rem,8vw,5rem)] font-bold leading-none"><span class="count" data-to="20">20</span></div>
           <p class="text-xs uppercase tracking-[0.16em] text-ink-2 mt-3">ans rue Cesar Campinchi</p>
         </div>
         <div data-reveal class="text-center py-6 sm:py-2 px-4">
-          <div class="font-display text-[clamp(3rem,8vw,5rem)] font-bold leading-none text-accent"><span class="count" data-to="4.8" data-dec="1">0</span><span class="text-ink-2 text-2xl align-middle">/5</span></div>
+          <div class="font-display text-[clamp(3rem,8vw,5rem)] font-bold leading-none text-accent"><span class="count" data-to="4.8" data-dec="1">4,8</span><span class="text-ink-2 text-2xl align-middle">/5</span></div>
           <p class="text-xs uppercase tracking-[0.16em] text-ink-2 mt-3">sur Google</p>
         </div>
         <div data-reveal class="text-center py-6 sm:py-2 px-4">
-          <div class="font-display text-[clamp(3rem,8vw,5rem)] font-bold leading-none"><span class="count" data-to="17">0</span></div>
+          <div class="font-display text-[clamp(3rem,8vw,5rem)] font-bold leading-none"><span class="count" data-to="17">17</span></div>
           <p class="text-xs uppercase tracking-[0.16em] text-ink-2 mt-3">voix, 16 cinq etoiles</p>
         </div>
       </div>
@@ -393,21 +393,25 @@
       animate(el, { strokeDashoffset: [len, 0] }, { duration: 0.55, easing: [0.2, 0.7, 0.2, 1] });
     });
 
-    // compteurs animes
-    inView('.count', (el) => {
-      const to = parseFloat(el.dataset.to);
-      const dec = parseInt(el.dataset.dec || '0', 10);
-      const start = performance.now(), dur = 900;
-      function step(now){
-        const t = Math.min(1, (now - start) / dur);
-        const e = 1 - Math.pow(1 - t, 3);
-        const v = to * e;
-        el.textContent = dec ? v.toFixed(dec).replace('.', ',') : Math.round(v);
-        if (t < 1) requestAnimationFrame(step);
-        else el.textContent = dec ? to.toFixed(dec).replace('.', ',') : to;
-      }
-      requestAnimationFrame(step);
-    }, { amount: 0.6 });
+    // compteurs : la valeur reelle est deja dans le HTML (filet anti-zero).
+    // L'animation n'est qu'une amelioration progressive, jamais l'etat de repos.
+    if (!reduce) {
+      inView('.count', (el) => {
+        const to = parseFloat(el.dataset.to);
+        const dec = parseInt(el.dataset.dec || '0', 10);
+        const final = dec ? to.toFixed(dec).replace('.', ',') : String(to);
+        const start = performance.now(), dur = 900;
+        function step(now){
+          const t = Math.min(1, (now - start) / dur);
+          const e = 1 - Math.pow(1 - t, 3);
+          const v = to * e;
+          el.textContent = dec ? v.toFixed(dec).replace('.', ',') : Math.round(v);
+          if (t < 1) requestAnimationFrame(step);
+          else el.textContent = final;
+        }
+        requestAnimationFrame(step);
+      }, { amount: 0.6 });
+    }
   </script>
 </body>
 </html>
